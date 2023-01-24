@@ -19,6 +19,13 @@ module "vpc" {
   tags = var.vpc_tags
 }
 
+module "security_groups" {
+  source         = "./security-groups"
+  name           = local.application_name
+  vpc_id         = module.vpc.vpc_id
+  container_port = var.container_port
+}
+
 resource "aws_ecs_cluster" "this" {
   name = local.application_name
 }
