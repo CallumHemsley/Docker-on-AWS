@@ -22,6 +22,6 @@ variable "container_image" {
   description = "Docker image to be launched"
 }
 
-# variable "aws_alb_target_group_arn" {
-#   description = "ARN of the alb target group"
-# }
+variable "aws_alb_target_group_arn" {
+  description = "ARN of the alb target group"
+}

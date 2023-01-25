@@ -88,9 +88,9 @@ resource "aws_ecs_service" "this" {
     assign_public_ip = false
   }
 
-  # load_balancer {
-  #   target_group_arn = var.aws_alb_target_group_arn
-  #   container_name = "${var.name}-container"
-  #   container_port   = var.container_port
-  # }
+  load_balancer {
+    target_group_arn = var.aws_alb_target_group_arn
+    container_name = "${var.name}-container"
+    container_port   = var.container_port
+  }
 }

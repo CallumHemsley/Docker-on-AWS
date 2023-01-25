@@ -8,3 +8,8 @@ variable "container_port" {
   description = "The port where the Docker is exposed"
   default     = 8080
 }
+
+variable "health_check_path" {
+  description = "Http path for task health check"
+  default     = "/health"
+}
