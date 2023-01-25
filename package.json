@@ -4,19 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/austinloveless/Docker-on-AWS.git"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/austinloveless/Docker-on-AWS/issues"
-  },
-  "homepage": "https://github.com/austinloveless/Docker-on-AWS#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
