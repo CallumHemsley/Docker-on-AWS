@@ -10,4 +10,6 @@ COPY . .
 
 LABEL maintainer="Austin Loveless - Forked by Callum Hemsley"
 
+EXPOSE 8080
+
 CMD node app.js
