@@ -1,7 +1,7 @@
 variable "container_image" {
   description = "image uri inside your ecr registry"
   type        = string
-  default     = "056984988198.dkr.ecr.eu-west-3.amazonaws.com/docker-on-aws/nodejs"
+  default     = "056984988198.dkr.ecr.eu-west-3.amazonaws.com/docker-on-aws-tf/nodejs"
 }
 
 variable "container_port" {
