@@ -21,3 +21,11 @@ variable "container_port" {
 variable "container_image" {
   description = "Docker image to be launched"
 }
+
+variable "aws_alb_target_group_arn" {
+  description = "arn for the target group of the application load balancer"
+}
+
+variable "aws_lb_listener" {
+  description = "reference to lb listner for dependency"
+}

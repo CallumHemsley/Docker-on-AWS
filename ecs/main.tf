@@ -106,4 +106,13 @@ resource "aws_ecs_service" "this" {
     security_groups  = var.ecs_service_security_groups
     assign_public_ip = false
   }
+
+  load_balancer {
+    container_name = "${var.name}-container"
+    target_group_arn = var.aws_alb_target_group_arn
+    container_port   = var.container_port
+  }
+  depends_on = [
+    var.aws_lb_listener
+  ]
 }
