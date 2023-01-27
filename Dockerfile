@@ -1,4 +1,4 @@
-FROM node:16
+FROM --platform=linux/amd64 node:11.15
 
 RUN mkdir /app
 WORKDIR /app
