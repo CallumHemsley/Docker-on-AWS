@@ -45,12 +45,12 @@ resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attach
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+resource "aws_iam_role_policy_attachment" "ecs-task-role-policy-logs" {
   role = aws_iam_role.ecs_task_role.name
   policy_arn = "arn:aws:iam::056984988198:policy/cloudwatch-logs-write"
 }
 
-resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-logs" {
   role = aws_iam_role.ecs_task_execution_role.name
   policy_arn = "arn:aws:iam::056984988198:policy/cloudwatch-logs-write"
 }
