@@ -45,6 +45,16 @@ resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attach
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+  role = aws_iam_role.ecs_task_role.name
+  policy_arn = "arn:aws:iam::056984988198:policy/cloudwatch-logs-write"
+}
+
+resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attachment" {
+  role = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::056984988198:policy/cloudwatch-logs-write"
+}
+
 resource "aws_ecs_task_definition" "this" {
   family                   = "ecs_task_definition"
   network_mode             = "awsvpc"
@@ -60,6 +70,15 @@ resource "aws_ecs_task_definition" "this" {
       containerPort = var.container_port
       hostPort      = var.container_port
     }]
+    logConfiguration= {
+        logDriver= "awslogs",
+        options= {
+            awslogs-create-group= "true",
+            awslogs-group= "callums-node-logs",
+            awslogs-region= "eu-west-3",
+            awslogs-stream-prefix= "awslogs-example"
+        }
+    },
   }])
   # in order to run a task, we have to give our task a task role.
   task_role_arn = aws_iam_role.ecs_task_role.arn
