@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-region: eu-west-3
-          role-to-assume: arn:aws:iam::056984988198:role/GitHubActionsECRPushf22f2
+          role-to-assume: arn:aws:iam::056984988198:role/GitHubActionsECRPush
       # -
       #   name: Login to Docker Hub
       #   uses: docker/login-action@v2
