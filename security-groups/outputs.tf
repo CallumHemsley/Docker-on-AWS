@@ -4,3 +4,7 @@ output "ecs_tasks" {
 output "alb" {
   value = aws_security_group.alb.id
 }
+
+output "rds_security_group_id" {
+  value = aws_security_group.rds.id
+}
