@@ -15,15 +15,21 @@ module "security_groups" {
 }
 
 module "alb" {
-  source = "./alb"
-  subnets = module.vpc.public_subnets
+  source              = "./alb"
+  subnets             = module.vpc.public_subnets
   alb_security_groups = [module.security_groups.alb]
-  name = local.application_name
-  vpc_id         = module.vpc.vpc_id
+  name                = local.application_name
+  vpc_id              = module.vpc.vpc_id
 }
 
 module "ecr" {
   source = "./ecr"
+}
+module "rds" {
+  source                = "./rds"
+  name                  = local.application_name
+  private_subnets       = module.vpc.private_subnets
+  rds_security_group_id = module.security_groups.rds_security_group_id
 }
 
 module "ecs" {
@@ -34,6 +40,6 @@ module "ecs" {
   ecs_service_security_groups = [module.security_groups.ecs_tasks]
   container_port              = var.container_port
   container_image             = var.container_image
-  aws_alb_target_group_arn = module.alb.aws_alb_target_group_arn
-  aws_lb_listener = module.alb.aws_lb_listener
+  aws_alb_target_group_arn    = module.alb.aws_alb_target_group_arn
+  aws_lb_listener             = module.alb.aws_lb_listener
 }
