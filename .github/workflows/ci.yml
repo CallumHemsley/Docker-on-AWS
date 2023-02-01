@@ -28,18 +28,20 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # - 
-      #   name: Build, tag, and push docker image to Amazon ECR
-      #   env:
-      #     REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     REPOSITORY: my-ecr-repo
-      #     IMAGE_TAG: ${{ github.sha }}
-      #   run: |
-      #     docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-      #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        #NEXT STEPS -> TERRAFORM provision an ecr etc, give it a default one, then change it and make it build a new image here :) 
+
+      - 
+        name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: nodejs
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:latest .
+          docker push $REGISTRY/$REPOSITORY:latest
 
     
-
+# THIS IS WHAT IT LOOKS LIKE IF I DO IT MANUALLY
       # - run: |
       #     docker build -t docker-on-aws-tf/nodejs .
       #     docker tag docker-on-aws-tf/nodejs:latest 056984988198.dkr.ecr.eu-west-3.amazonaws.com/docker-on-aws-tf/nodejs:latest
