@@ -1,10 +1,9 @@
 name: Deploy app on master merge
 
 on:
-  # push:
-  #   branches:
-  #     - master
-  pull_request:
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 permissions:
