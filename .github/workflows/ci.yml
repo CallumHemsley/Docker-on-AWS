@@ -1,0 +1,51 @@
+name: Deploy app on master merge
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read  # This is required for actions/checkout
+
+jobs:
+  deploy:
+    permissions:
+      id-token: write # This is required for requesting the JWT
+    runs-on: ubuntu-22.04
+
+    steps:
+      - 
+        name: Check out code
+        uses: actions/checkout@v3
+      - 
+        name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: eu-west-3
+          role-to-assume: arn:aws:iam::056984988198:role/GitHubActionsECRPush
+      - 
+        name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+        #NEXT STEPS -> TERRAFORM provision an ecr etc, give it a default one, then change it and make it build a new image here :) 
+
+      - 
+        name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: docker-on-aws-tf/nodejs
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REPOSITORY:latest .
+          docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:latest
+          docker push $REGISTRY/$REPOSITORY:latest
+
+    
+# THIS IS WHAT IT LOOKS LIKE IF I DO IT MANUALLY
+      # - run: |
+      #     docker build -t docker-on-aws-tf/nodejs .
+      #     docker tag docker-on-aws-tf/nodejs:latest 056984988198.dkr.ecr.eu-west-3.amazonaws.com/docker-on-aws-tf/nodejs:latest
+      #     docker push 056984988198.dkr.ecr.eu-west-3.amazonaws.com/docker-on-aws-tf/nodejs:latest
