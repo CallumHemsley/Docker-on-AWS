@@ -29,3 +29,7 @@ variable "aws_alb_target_group_arn" {
 variable "aws_lb_listener" {
   description = "reference to lb listner for dependency"
 }
+
+variable "image_version" {
+  description = "version of docker image we want to run"
+}
