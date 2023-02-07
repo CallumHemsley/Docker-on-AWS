@@ -56,14 +56,14 @@ resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-logs" 
 }
 
 resource "aws_ecs_task_definition" "this" {
-  family                   = "ecs_task_definition"
+  family                   = "ecs_task_definition_${var.name}"
   network_mode             = "awsvpc"
   requires_compatibilities = [var.launch_type]
   cpu                      = 256
   memory                   = 512
   container_definitions = jsonencode([{
     name      = "${var.name}-container"
-    image     = "${var.container_image}:latest"
+    image     = "${var.container_image}:${var.image_version}"
     essential = true
     portMappings = [{
       protocol      = "tcp"

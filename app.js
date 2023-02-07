@@ -7,6 +7,8 @@ const publicDir = path.join(__dirname, "public");
 
 app.use(express.static(publicDir));
 
+app.get('/health', (_req, res) => res.send('Health check status: ok'))
+
 app.listen(port, HOST, () => {
     console.log(`Running on host ${HOST}, Listening on port ${port}`);
 });
